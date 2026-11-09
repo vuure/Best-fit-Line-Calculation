@@ -7,34 +7,26 @@ Happines arrive, hunger like a storm
 import numpy as np
 import matplotlib.pyplot as plt
 
-# ------------------------------------------------------------------
-# DATA (SI units).  a values are taken from Table 3 of the report.
-# ------------------------------------------------------------------
-g = 9.8                                              # m/s^2
-L2 = 0.100                                           # m, flag length
+g = 9.8
+L2 = 0.100
 
-# Series 1: m_a changes, m + m_a = 0.280 kg
-ma1 = np.array([0.010, 0.030, 0.050, 0.070])         # kg
-t1_s1 = np.array([0.423, 0.229, 0.230, 0.180])       # s
-t2_s1 = np.array([0.216, 0.109, 0.082, 0.073])       # s
-t3_s1 = np.array([1.651, 0.799, 0.594, 0.645])       # s
-a1 = np.array([0.137, 0.602, 1.322, 1.262])          # m/s^2
-F1 = ma1 * g                                         # N
+ma1 = np.array([0.010, 0.030, 0.050, 0.070])
+t1_s1 = np.array([0.423, 0.229, 0.230, 0.180])
+t2_s1 = np.array([0.216, 0.109, 0.082, 0.073])
+t3_s1 = np.array([1.651, 0.799, 0.594, 0.645])
+a1 = np.array([0.137, 0.602, 1.322, 1.262])
+F1 = ma1 * g
 
-# Series 2: m changes, m_a = 0.010 kg
-ma2 = 0.010                                          # kg
-m2 = np.array([0.270, 0.250, 0.230, 0.210])          # kg
-t1_s2 = np.array([0.323, 0.302, 0.282, 0.271])       # s
-t2_s2 = np.array([0.158, 0.151, 0.141, 0.134])       # s
-t3_s2 = np.array([1.156, 1.111, 1.018, 0.975])       # s
-a2 = np.array([0.279, 0.298, 0.348, 0.387])          # m/s^2
+ma2 = 0.010
+m2 = np.array([0.270, 0.250, 0.230, 0.210])
+t1_s2 = np.array([0.323, 0.302, 0.282, 0.271])
+t2_s2 = np.array([0.158, 0.151, 0.141, 0.134])
+t3_s2 = np.array([1.156, 1.111, 1.018, 0.975])
+a2 = np.array([0.279, 0.298, 0.348, 0.387])
 
-# ------------------------------------------------------------------
-# READING UNCERTAINTIES  (!!! check these against your Table 1 !!!)
-# ------------------------------------------------------------------
-dt = 0.001        # s,  photogate timer resolution
-dL2 = 0.0005      # m,  reading uncertainty of the length of the flag
-dm = 0.0001       # kg, reading uncertainty of the masses (0.1 g)
+dt = 0.001
+dL2 = 0.0005
+dm = 0.0001
 
 
 def delta_a(t1, t2, t3, a):
@@ -93,9 +85,9 @@ xx = np.linspace(0, 0.75, 100)
 ax.errorbar(F1, a1, xerr=dF1, yerr=da1, fmt='o', color='blue', capsize=3,
             label='Measured data')
 ax.plot(xx, k1 * xx + b1, color='red',
-        label=f'Linear fit: $a$ = ({k1:.2f})$F_a$ + ({b1:.2f})')
+        label=f'$a$ = ({k1:.2f})$F_a$ + ({b1:.2f})')
 ax.plot(xx, k1_th * xx, color='green', linestyle='--',
-        label=r'Theory: $a = F_a/(m+m_a)$')
+        label=r'$a = F_a/(m+m_a)$')
 ax.set_xlabel(r'Applied force $F_a$ (N)')
 ax.set_ylabel(r'Acceleration $a$ (m/s$^2$)')
 ax.set_xlim(0, 0.75)
@@ -114,7 +106,7 @@ mm = np.linspace(0.19, 0.29, 100)
 axa.errorbar(m2, a2, xerr=dm, yerr=da2, fmt='o', color='blue', capsize=3,
              label='Measured data')
 axa.plot(mm, ma2 * g / (mm + ma2), color='green', linestyle='--',
-         label=r'Theory: $a = m_a g/(m+m_a)$')
+         label=r' $a = m_a g/(m+m_a)$')
 axa.set_xlabel(r'Glider mass $m$ (kg)')
 axa.set_ylabel(r'Acceleration $a$ (m/s$^2$)')
 axa.set_title('(a)')
@@ -124,9 +116,9 @@ axa.legend()
 axb.errorbar(m2, 1 / a2, xerr=dm, yerr=d_inv_a2, fmt='o', color='blue',
              capsize=3, label='Measured data')
 axb.plot(mm, k2 * mm + b2, color='red',
-         label=f'Linear fit: 1/$a$ = ({k2:.1f})$m$ + ({b2:.2f})')
+         label=f'1/$a$ = ({k2:.1f})$m$ + ({b2:.2f})')
 axb.plot(mm, k2_th * mm + b2_th, color='green', linestyle='--',
-         label=r'Theory: 1/$a$ = $m/(m_a g)$ + 1/$g$')
+         label=r'1/$a$ = $m/(m_a g)$ + 1/$g$')
 axb.set_xlabel(r'Glider mass $m$ (kg)')
 axb.set_ylabel(r'1/$a$ (s$^2$/m)')
 axb.set_title('(b)')
